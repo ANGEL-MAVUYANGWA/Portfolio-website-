@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Projects | Angel Shiluva Mavuyangwa | Software Development & Data Science</title>
+    <meta name="description" content="Explore projects by Angel Shiluva Mavuyangwa including blockchain, full-stack applications, and ML pipelines.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a class="navbar-brand" href="index.html"><i class="fas fa-code"></i>ASM<span class="dot">.</span></a>
+            <div class="navbar-links">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="about.html">About</a>
+                <a class="nav-link active" href="projects.html">Projects</a>
+                <a class="nav-link" href="contact.html">Contact</a>
+            </div>
+            <button class="hamburger" id="hamburger" type="button"><span></span><span></span><span></span></button>
+        </div>
+    </nav>
+
+    <section class="page-hero">
+        <div class="container">
+            <h1 class="hero-title">Featured <span class="gradient-text">Projects</span></h1>
+            <p class="hero-subtitle">From enterprise systems to machine learning pipelines</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All Projects</button>
+                <button class="filter-btn" data-filter="software">Software Development</button>
+                <button class="filter-btn" data-filter="datascience">Data Science</button>
+            </div>
+            <div class="projects-grid" id="projectsGrid">
+                <div class="project-card" data-category="software">
+                    <div class="project-icon">⛓️</div>
+                    <div class="project-content">
+                        <span class="project-tag blockchain">Blockchain</span>
+                        <h3>JavaChain — Enterprise Blockchain Platform</h3>
+                        <p>A production-ready blockchain implementation in Java featuring Proof-of-Work consensus, SHA-256 cryptographic hashing, ECDSA digital signatures, a UTXO transaction model, WebSocket-based P2P networking, and a full REST API.</p>
+                        <div class="tech-stack"><span>Java 11+</span><span>Maven</span><span>WebSocket</span><span>REST API</span></div>
+                        <a href="https://github.com/Mavuyangwa-Angel" target="_blank" class="project-link"><i class="fab fa-github"></i> View Code</a>
+                    </div>
+                </div>
+                <div class="project-card" data-category="software">
+                    <div class="project-icon">🏋️</div>
+                    <div class="project-content">
+                        <span class="project-tag fullstack">Full-Stack</span>
+                        <h3>FitMetric Pro — Health & Fitness REST API</h3>
+                        <p>A scalable full-stack health-tracking platform built with Spring Boot 3.2 and Java 21. Features JWT authentication, role-based access control, weight tracking, nutrition monitoring, AI-powered meal planning via Google Gemini AI, and comprehensive analytics.</p>
+                        <div class="tech-stack"><span>Java 21</span><span>Spring Boot</span><span>PostgreSQL</span><span>JWT</span><span>Gemini AI</span></div>
+                        <a href="https://github.com/Mavuyangwa-Angel" target="_blank" class="project-link"><i class="fab fa-github"></i> View Code</a>
+                    </div>
+                </div>
+                <div class="project-card" data-category="datascience">
+                    <div class="project-icon">📈</div>
+                    <div class="project-content">
+                        <span class="project-tag ml">Machine Learning</span>
+                        <h3>Stock Price Forecasting — ML Pipeline</h3>
+                        <p>An end-to-end financial data science project covering data collection with Yahoo Finance, cleaning and preprocessing, exploratory data analysis, feature engineering, multiple ML forecasting models, and an interactive Streamlit dashboard with Plotly visuals.</p>
+                        <div class="tech-stack"><span>Python</span><span>Pandas</span><span>Scikit-learn</span><span>yfinance</span><span>Streamlit</span><span>Plotly</span></div>
+                        <a href="https://github.com/Mavuyangwa-Angel" target="_blank" class="project-link"><i class="fab fa-github"></i> View Code</a>
+                    </div>
+                </div>
+                <div class="project-card" data-category="datascience">
+                    <div class="project-icon">👁️</div>
+                    <div class="project-content">
+                        <span class="project-tag cv">Computer Vision</span>
+                        <h3>Face Recognition + AI Image Analysis</h3>
+                        <p>A full-stack web application using Flask and OpenCV Haar Cascades to detect faces in uploaded images. Includes AI-powered analytics for blur detection, brightness, contrast, sharpness scoring, and color composition insights with secure login.</p>
+                        <div class="tech-stack"><span>Python</span><span>Flask</span><span>OpenCV</span><span>bcrypt</span><span>Computer Vision</span></div>
+                        <a href="https://github.com/Mavuyangwa-Angel" target="_blank" class="project-link"><i class="fab fa-github"></i> View Code</a>
+                    </div>
+                </div>
+                <div class="project-card" data-category="software">
+                    <div class="project-icon">🏦</div>
+                    <div class="project-content">
+                        <span class="project-tag desktop">Desktop App</span>
+                        <h3>Banking System — Java Desktop Application</h3>
+                        <p>A Java desktop banking simulator built with Swing GUI demonstrating core OOP principles: encapsulation, inheritance, polymorphism, and abstraction. Supports three account types with full CRUD operations and persistent file-based storage.</p>
+                        <div class="tech-stack"><span>Java</span><span>Swing</span><span>OOP</span><span>File I/O</span></div>
+                        <a href="https://github.com/Mavuyangwa-Angel" target="_blank" class="project-link"><i class="fab fa-github"></i> View Code</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CV Selection Modal -->
+    <div id="cvModal" class="cv-modal">
+        <div class="cv-modal-content">
+            <div class="cv-modal-header">
+                <h3><i class="fas fa-download"></i> Select Your CV</h3>
+                <button class="cv-modal-close" id="closeModalBtn">&times;</button>
+            </div>
+            <div class="cv-modal-body">
+                <p>Choose the CV that matches the role you're interested in:</p>
+                <div class="cv-options">
+                    <button class="cv-option-btn" data-cv="business-analyst">
+                        <i class="fas fa-chart-line"></i>
+                        <div class="cv-option-content">
+                            <h4>Business Analyst CV</h4>
+                            <p>Requirements gathering, process modeling, stakeholder management, Agile methodologies</p>
+                            <span class="cv-badge">📋 Recommended for BA roles</span>
+                        </div>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <button class="cv-option-btn" data-cv="software-dev">
+                        <i class="fas fa-code"></i>
+                        <div class="cv-option-content">
+                            <h4>Software Developer CV</h4>
+                            <p>Java, Spring Boot, React, REST APIs, Full-stack development, OOP</p>
+                            <span class="cv-badge">💻 Recommended for Dev roles</span>
+                        </div>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                    <button class="cv-option-btn" data-cv="data-science">
+                        <i class="fas fa-robot"></i>
+                        <div class="cv-option-content">
+                            <h4>Data Science CV</h4>
+                            <p>Python, Machine Learning, Pandas, Scikit-learn, Data visualization, Analytics</p>
+                            <span class="cv-badge">📊 Recommended for DS roles</span>
+                        </div>
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info"><h3>Angel Shiluva Mavuyangwa</h3><p>Software Developer & Business Analyst</p></div>
+                <div class="footer-social"><h3>Connect with me</h3><div class="social-icons">
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+                    <a href="#" class="social-icon"><i class="fas fa-envelope"></i></a>
+                </div></div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2024 Angel Shiluva Mavuyangwa · Built with HTML/CSS/JS</p></div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
