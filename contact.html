@@ -1,126 +1,205 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Contact | Angel Shiluva Mavuyangwa | Software Developer</title>
-    <meta name="description" content="Contact Angel Shiluva Mavuyangwa for software development, data science, and business analysis opportunities.">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact | Angel Shiluva Mavuyangwa</title>
+  <meta name="description" content="Get in touch with Angel Shiluva Mavuyangwa — Software Developer and Business Analyst open to opportunities.">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="container">
-            <a class="navbar-brand" href="index.html"><i class="fas fa-code"></i>A<span class="dot">.</span>Mavuyangwa</a>
-            <div class="navbar-links">
-                <a class="nav-link" href="index.html">Home</a>
-                <a class="nav-link" href="about.html">About</a>
-                <a class="nav-link" href="projects.html">Projects</a>
-                <a class="nav-link active" href="contact.html">Contact</a>
-            </div>
-            <button class="hamburger" id="hamburger" type="button"><span></span><span></span><span></span></button>
-        </div>
-    </nav>
 
-    <section class="page-hero">
-        <div class="container">
-            <h1 class="hero-title">Get In <span class="gradient-text">Touch</span></h1>
-            <p class="hero-subtitle">Open to software development, data science, and business analysis roles — junior or internship level. Let's connect.</p>
-        </div>
-    </section>
-
-    <section class="section">
-        <div class="container">
-            <div class="contact-wrapper">
-                <div class="contact-info">
-                    <h2>Let's Connect</h2>
-                    <p>I'm currently looking for junior and internship opportunities where I can contribute my skills in software development, data science, and business analysis.</p>
-                    
-                    <div class="contact-details">
-                        <div class="contact-item"><div class="contact-icon"><i class="fas fa-envelope"></i></div><div><h3>Email</h3><p>angel.shiluva@email.com</p></div></div>
-                        <div class="contact-item"><div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div><div><h3>Location</h3><p>Kliptown, Gauteng, South Africa</p></div></div>
-                        <div class="contact-item"><div class="contact-icon"><i class="fab fa-linkedin"></i></div><div><h3>LinkedIn</h3><p>linkedin.com/in/angel-shiluva</p></div></div>
-                        <div class="contact-item"><div class="contact-icon"><i class="fab fa-github"></i></div><div><h3>GitHub</h3><p>github.com/Mavuyangwa-Angel</p></div></div>
-                    </div>
-                    
-                    <div class="availability-card">
-                        <i class="fas fa-briefcase"></i>
-                        <div><h4>Open for opportunities</h4><p>Available for full-time, internship, and freelance work</p></div>
-                    </div>
-                </div>
-                
-                <div class="contact-form-container">
-                    <h3>Send a Message</h3>
-                    <form id="contactForm" action="https://formspree.io/f/your-form-id" method="POST">
-                        <div class="form-group"><label for="name">Full Name</label><input type="text" id="name" name="name" required placeholder="Your name"></div>
-                        <div class="form-group"><label for="email">Email Address</label><input type="email" id="email" name="email" required placeholder="your@email.com"></div>
-                        <div class="form-group"><label for="subject">Subject</label><select id="subject" name="subject" required><option value="" disabled selected>Select a subject</option><option>Job Opportunity</option><option>Project Collaboration</option><option>Technical Question</option><option>Other</option></select></div>
-                        <div class="form-group"><label for="message">Message</label><textarea id="message" name="message" rows="5" required placeholder="Tell me about your opportunity..."></textarea></div>
-                        <button type="submit" class="btn btn-primary" id="submitBtn"><i class="fas fa-paper-plane"></i> Send Message</button>
-                        <div id="formMessage" class="form-message" style="display: none;"></div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CV Selection Modal -->
-    <div id="cvModal" class="cv-modal">
-        <div class="cv-modal-content">
-            <div class="cv-modal-header">
-                <h3><i class="fas fa-download"></i> Select Your CV</h3>
-                <button class="cv-modal-close" id="closeModalBtn">&times;</button>
-            </div>
-            <div class="cv-modal-body">
-                <p>Choose the CV that matches the role you're interested in:</p>
-                <div class="cv-options">
-                    <button class="cv-option-btn" data-cv="business-analyst">
-                        <i class="fas fa-chart-line"></i>
-                        <div class="cv-option-content">
-                            <h4>Business Analyst CV</h4>
-                            <p>Requirements gathering, process modeling, stakeholder management, Agile methodologies</p>
-                            <span class="cv-badge">📋 Recommended for BA roles</span>
-                        </div>
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
-                    <button class="cv-option-btn" data-cv="software-dev">
-                        <i class="fas fa-code"></i>
-                        <div class="cv-option-content">
-                            <h4>Software Developer CV</h4>
-                            <p>Java, Spring Boot, React, REST APIs, Full-stack development, OOP</p>
-                            <span class="cv-badge">💻 Recommended for Dev roles</span>
-                        </div>
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
-                    <button class="cv-option-btn" data-cv="data-science">
-                        <i class="fas fa-robot"></i>
-                        <div class="cv-option-content">
-                            <h4>Data Science CV</h4>
-                            <p>Python, Machine Learning, Pandas, Scikit-learn, Data visualization, Analytics</p>
-                            <span class="cv-badge">📊 Recommended for DS roles</span>
-                        </div>
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
+  <!-- ── NAVBAR ─────────────────────────────── -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <span class="brand-icon"><span class="icon" data-icon="code"></span></span>
+        A<span class="brand-dot">.</span>Mavuyangwa
+      </a>
+      <div class="navbar-links" id="navbarLinks">
+        <a class="nav-link" href="index.html">Home</a>
+        <a class="nav-link" href="about.html">About</a>
+        <a class="nav-link" href="projects.html">Projects</a>
+        <a class="nav-link active" href="contact.html">Contact</a>
+      </div>
+      <button class="hamburger" id="hamburger" type="button" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
     </div>
+  </nav>
 
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-info"><h3>Angel Shiluva Mavuyangwa</h3><p>Software Developer & Business Analyst</p></div>
-                <div class="footer-social"><h3>Connect with me</h3><div class="social-icons">
-                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
-                    <a href="#" class="social-icon"><i class="fas fa-envelope"></i></a>
-                </div></div>
+  <!-- ── PAGE HERO ──────────────────────────── -->
+  <section class="page-hero">
+    <div class="container">
+      <h1 class="hero-title">Get In <span class="gradient-text">Touch</span></h1>
+      <p class="hero-subtitle">Open to opportunities, collaborations, and interesting conversations</p>
+    </div>
+  </section>
+
+  <!-- ── CONTACT CONTENT ────────────────────── -->
+  <section class="section">
+    <div class="container">
+      <div class="contact-wrapper">
+
+        <!-- Left: Info -->
+        <div class="contact-info">
+          <h2>Let's Work <span class="gradient-text">Together</span></h2>
+          <p>
+            Whether you're looking for a developer to build your next system, a data scientist to
+            make sense of your data, or a business analyst to bridge the gap between tech and
+            strategy — I'd love to hear from you.
+          </p>
+
+          <div class="contact-details">
+
+            <div class="contact-item reveal">
+              <div class="contact-icon">
+                <span class="icon" data-icon="mail"></span>
+              </div>
+              <div>
+                <h3>Email</h3>
+                <p>angelshiluva2004@email.com</p>
+              </div>
             </div>
-            <div class="footer-bottom"><p>&copy; 2024 Angel Shiluva Mavuyangwa · Built with HTML/CSS/JS</p></div>
-        </div>
-    </footer>
 
-    <script src="js/script.js"></script>
+            <div class="contact-item reveal">
+              <div class="contact-icon">
+                <span class="icon" data-icon="mapPin"></span>
+              </div>
+              <div>
+                <h3>Location</h3>
+                <p>Gauteng, South Africa &mdash; Open to Remote</p>
+              </div>
+            </div>
+
+            <div class="contact-item reveal">
+              <div class="contact-icon">
+                <span class="icon" data-icon="linkedin"></span>
+              </div>
+              <div>
+                <h3>LinkedIn</h3>
+                <p>
+                  <a href="https://www.linkedin.com/in/angel-shiluva-mavuyangwa-6a89b0410?utm_source=share_via&utm_content=profile&utm_medium=member_ios"
+                     target="_blank"
+                     style="color:var(--teal);text-decoration:none;">
+                    angel-shiluva-mavuyangwa
+                  </a>
+                </p>
+              </div>
+            </div>
+
+            <div class="contact-item reveal">
+              <div class="contact-icon">
+                <span class="icon" data-icon="github"></span>
+              </div>
+              <div>
+                <h3>GitHub</h3>
+                <p>
+                  <a href="https://github.com/ANGEL-MAVUYANGWA"
+                     target="_blank"
+                     style="color:var(--teal);text-decoration:none;">
+                    Mavuyangwa-Angel
+                  </a>
+                </p>
+              </div>
+            </div>
+
+          </div><!-- /contact-details -->
+
+          <div class="availability-card reveal">
+            <div class="avail-icon">
+              <span class="icon" data-icon="checkCircle"></span>
+            </div>
+            <div>
+              <h4>Available for Work</h4>
+              <p>Internships, graduate roles, freelance contracts &amp; collaborations</p>
+            </div>
+          </div>
+
+        </div><!-- /contact-info -->
+
+        <!-- Right: Form -->
+        <div class="contact-form-container reveal">
+          <h3>Send a Message</h3>
+
+          <div id="contactForm">
+
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+              <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input type="text" id="firstName" placeholder="Jane" required>
+              </div>
+              <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input type="text" id="lastName" placeholder="Doe" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" placeholder="jane@company.com" required>
+            </div>
+
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <select id="subject">
+                <option value="" disabled selected>Select a topic…</option>
+                <option value="job">Job / Internship Opportunity</option>
+                <option value="collab">Project Collaboration</option>
+                <option value="freelance">Freelance Work</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" placeholder="Tell me about your project or opportunity…" required></textarea>
+            </div>
+
+            <button type="button" class="btn btn-primary" id="submitBtn" style="width:100%;justify-content:center;">
+              <span class="icon" data-icon="send"></span>
+              <span id="submitBtnText">Send Message</span>
+            </button>
+
+            <div id="formMessage" class="form-message" style="display:none;"></div>
+
+          </div><!-- /contactForm -->
+        </div>
+
+      </div><!-- /contact-wrapper -->
+    </div>
+  </section>
+
+  <!-- ── FOOTER ─────────────────────────────── -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-info">
+          <h3>Angel Shiluva Mavuyangwa</h3>
+          <p>Software Developer &amp; Business Analyst</p>
+        </div>
+        <div class="footer-social">
+          <h3>Connect</h3>
+          <div class="social-icons">
+            <a href="https://www.linkedin.com/in/angel-shiluva-mavuyangwa-6a89b0410?utm_source=share_via&utm_content=profile&utm_medium=member_ios" target="_blank" class="social-icon" aria-label="LinkedIn">
+              <span class="icon" data-icon="linkedin"></span>
+            </a>
+            <a href="https://github.com/ANGEL-MAVUYANGWA " target="_blank" class="social-icon" aria-label="GitHub">
+              <span class="icon" data-icon="github"></span>
+            </a>
+            <a href="mailto:angelshiluva2004@email.com" class="social-icon" aria-label="Email">
+              <span class="icon" data-icon="mail"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Angel Shiluva Mavuyangwa &middot; Built with HTML / CSS / JS</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/icons.js"></script>
+  <script src="js/script.js"></script>
 </body>
 </html>

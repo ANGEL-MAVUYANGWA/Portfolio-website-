@@ -1,324 +1,272 @@
-// Angel Shiluva Mavuyangwa Portfolio - script.js
+/* ============================================================
+   Angel Mavuyangwa Portfolio — script.js
+   All interactive behaviour in one clean file
+   ============================================================ */
 
-document.addEventListener('DOMContentLoaded', function() {
-    
-    // ========================================
-    // Mobile Navigation Toggle
-    // ========================================
-    const hamburger = document.getElementById('hamburger');
-    const navbarLinks = document.querySelector('.navbar-links');
-    
-    if (hamburger && navbarLinks) {
-        hamburger.addEventListener('click', function() {
-            navbarLinks.classList.toggle('active');
-            hamburger.classList.toggle('active');
-        });
-        
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', () => {
-                navbarLinks.classList.remove('active');
-                hamburger.classList.remove('active');
-            });
-        });
-    }
-    
-    window.addEventListener('resize', function() {
-        if (window.innerWidth > 768 && navbarLinks && navbarLinks.classList.contains('active')) {
-            navbarLinks.classList.remove('active');
-            if (hamburger) hamburger.classList.remove('active');
-        }
+'use strict';
+
+// ── NAVBAR ─────────────────────────────────────────────────
+(function initNavbar() {
+  const navbar    = document.getElementById('navbar');
+  const hamburger = document.getElementById('hamburger');
+  const links     = document.getElementById('navbarLinks');
+  if (!navbar) return;
+
+  // Scroll shadow
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 20);
+  }, { passive: true });
+
+  // Hamburger toggle
+  hamburger?.addEventListener('click', () => {
+    const open = hamburger.classList.toggle('active');
+    links.classList.toggle('active', open);
+    hamburger.setAttribute('aria-expanded', open);
+  });
+
+  // Close nav on link click (mobile)
+  links?.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger?.classList.remove('active');
+      links.classList.remove('active');
     });
-    
-    // ========================================
-    // Typewriter Effect
-    // ========================================
-    const roles = ["Software Developer", "Data Science Enthusiast", "Business Analyst"];
-    let roleIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    const typewriterElement = document.getElementById('typewriter');
-    
-    function typeEffect() {
-        if (!typewriterElement) return;
-        const currentRole = roles[roleIndex];
-        
-        if (!isDeleting && charIndex <= currentRole.length) {
-            typewriterElement.textContent = currentRole.substring(0, charIndex);
-            charIndex++;
-            setTimeout(typeEffect, 100);
-        } else if (!isDeleting && charIndex > currentRole.length) {
-            isDeleting = true;
-            setTimeout(typeEffect, 2000);
-        } else if (isDeleting && charIndex >= 0) {
-            typewriterElement.textContent = currentRole.substring(0, charIndex);
-            charIndex--;
-            setTimeout(typeEffect, 50);
-        } else if (isDeleting && charIndex < 0) {
-            isDeleting = false;
-            roleIndex = (roleIndex + 1) % roles.length;
-            charIndex = 0;
-            setTimeout(typeEffect, 500);
-        }
+  });
+
+  // Close nav on outside click
+  document.addEventListener('click', e => {
+    if (links?.classList.contains('active') &&
+        !links.contains(e.target) &&
+        !hamburger?.contains(e.target)) {
+      hamburger?.classList.remove('active');
+      links.classList.remove('active');
     }
-    
-    typeEffect();
-    
-    // ========================================
-    // Animated Progress Bars
-    // ========================================
-    const progressBars = document.querySelectorAll('.progress-fill');
-    if (progressBars.length > 0) {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const bar = entry.target;
-                    const width = bar.getAttribute('data-width');
-                    if (width && bar.style.width !== width) {
-                        bar.style.width = width;
-                    }
-                    observer.unobserve(bar);
-                }
-            });
-        }, { threshold: 0.3 });
-        progressBars.forEach(bar => observer.observe(bar));
-    }
-    
-    // ========================================
-    // Project Filtering
-    // ========================================
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const projects = document.querySelectorAll('.project-card');
-    
-    if (filterButtons.length > 0) {
-        filterButtons.forEach(btn => {
-            btn.addEventListener('click', function() {
-                filterButtons.forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                const filter = this.getAttribute('data-filter');
-                projects.forEach(project => {
-                    if (filter === 'all' || project.getAttribute('data-category') === filter) {
-                        project.style.display = 'grid';
-                        setTimeout(() => {
-                            project.style.opacity = '1';
-                            project.style.transform = 'scale(1)';
-                        }, 10);
-                    } else {
-                        project.style.opacity = '0';
-                        project.style.transform = 'scale(0.8)';
-                        setTimeout(() => {
-                            project.style.display = 'none';
-                        }, 300);
-                    }
-                });
-            });
-        });
-    }
-    
-    // ========================================
-    // Scroll Animations
-    // ========================================
-    const animatedElements = document.querySelectorAll('.skill-preview, .featured-card, .project-card, .category-card');
-    if (animatedElements.length > 0) {
-        const scrollObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                    scrollObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.1 });
-        animatedElements.forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            scrollObserver.observe(el);
-        });
-    }
-    
-    // ========================================
-    // CV MODAL FUNCTIONALITY
-    // ========================================
-    const cvModal = document.getElementById('cvModal');
-    const closeModalBtn = document.getElementById('closeModalBtn');
-    const cvOptionBtns = document.querySelectorAll('.cv-option-btn');
-    
-    function openCVModal() {
-        if (cvModal) {
-            cvModal.classList.add('show');
-            document.body.style.overflow = 'hidden';
-        }
-    }
-    
-    function closeCVModal() {
-        if (cvModal) {
-            cvModal.classList.remove('show');
-            document.body.style.overflow = '';
-        }
-    }
-    
-    function downloadCV(cvType) {
-        let fileUrl = '';
-        let fileName = '';
-        
-        switch(cvType) {
-            case 'business-analyst':
-                fileUrl = 'Files/Business_Analyst_CV.pdf';
-                fileName = 'Angel_Mavuyangwa_Business_Analyst_CV.pdf';
-                break;
-            case 'software-dev':
-                fileUrl = 'Files/Software_Developer_CV.pdf';
-                fileName = 'Angel_Mavuyangwa_Software_Developer_CV.pdf';
-                break;
-            case 'data-science':
-                fileUrl = 'Files/Data_Science_CV.pdf';
-                fileName = 'Angel_Mavuyangwa_Data_Science_CV.pdf';
-                break;
-            default:
-                console.error('Unknown CV type - script.js:178');
-                return;
-        }
-        
-        const link = document.createElement('a');
-        link.href = fileUrl;
-        link.download = fileName;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        
-        closeCVModal();
-        showNotification(`Downloading ${fileName}`);
-    }
-    
-    function showNotification(message) {
-        const notification = document.createElement('div');
-        notification.className = 'download-notification';
-        notification.innerHTML = `<i class="fas fa-check-circle"></i><span>${message}</span>`;
-        document.body.appendChild(notification);
-        
-        setTimeout(() => {
-            notification.style.animation = 'slideOutRight 0.3s ease';
-            setTimeout(() => notification.remove(), 300);
-        }, 3000);
-    }
-    
-    // Add click handlers to all Download CV buttons
-    const downloadCVBtns = document.querySelectorAll('.download-cv-btn, .btn-primary .fa-download, .btn-primary');
-    downloadCVBtns.forEach(btn => {
-        let targetBtn = btn;
-        if (btn.tagName === 'I' && btn.classList.contains('fa-download')) {
-            targetBtn = btn.closest('a, .btn');
-        }
-        if (targetBtn && targetBtn.textContent.includes('Download')) {
-            targetBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                openCVModal();
-            });
-        }
+  });
+})();
+
+// ── TYPEWRITER ─────────────────────────────────────────────
+(function initTypewriter() {
+  const el = document.getElementById('typewriter');
+  if (!el) return;
+
+  const words = [
+    'Software Developer',
+    'Business Analyst',
+    'Data Science Enthusiast',
+    'Full-Stack Engineer',
+    'ML Practitioner',
+  ];
+  let wIdx = 0, cIdx = 0, deleting = false;
+
+  function tick() {
+    const word    = words[wIdx];
+    const current = deleting ? word.slice(0, cIdx--) : word.slice(0, cIdx++);
+    el.textContent = current;
+
+    let delay = deleting ? 60 : 95;
+    if (!deleting && cIdx > word.length) { delay = 1800; deleting = true; }
+    if (deleting && cIdx < 0)           { deleting = false; wIdx = (wIdx + 1) % words.length; delay = 350; }
+    setTimeout(tick, delay);
+  }
+  tick();
+})();
+
+// ── SCROLL-REVEAL ───────────────────────────────────────────
+(function initReveal() {
+  const targets = document.querySelectorAll('.reveal');
+  if (!targets.length) return;
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
     });
-    
-    // Also handle any button that contains "CV" in text
-    document.querySelectorAll('a, .btn').forEach(btn => {
-        if (btn.textContent && btn.textContent.includes('CV') && btn.textContent.includes('Download')) {
-            btn.addEventListener('click', function(e) {
-                e.preventDefault();
-                openCVModal();
-            });
+  }, { threshold: 0.12 });
+
+  targets.forEach(el => observer.observe(el));
+})();
+
+// ── SKILL BARS ──────────────────────────────────────────────
+(function initSkillBars() {
+  const fills = document.querySelectorAll('.progress-fill');
+  if (!fills.length) return;
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const fill = entry.target;
+        fill.style.width = fill.dataset.width || '0%';
+        observer.unobserve(fill);
+      }
+    });
+  }, { threshold: 0.4 });
+
+  fills.forEach(fill => observer.observe(fill));
+})();
+
+// ── PROJECT FILTER ──────────────────────────────────────────
+(function initFilter() {
+  const btns  = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('.project-card');
+  if (!btns.length) return;
+
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      btns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filter = btn.dataset.filter;
+      cards.forEach(card => {
+        const show = filter === 'all' || card.dataset.category === filter;
+        card.style.display = show ? '' : 'none';
+        // small bounce-in
+        if (show) {
+          card.style.animation = 'none';
+          card.offsetHeight; // reflow
+          card.style.animation = '';
         }
+      });
     });
-    
-    if (closeModalBtn) {
-        closeModalBtn.addEventListener('click', closeCVModal);
-    }
-    
-    if (cvModal) {
-        cvModal.addEventListener('click', function(e) {
-            if (e.target === cvModal) closeCVModal();
-        });
-    }
-    
-    cvOptionBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-            const cvType = this.getAttribute('data-cv');
-            if (cvType) downloadCV(cvType);
-        });
+  });
+})();
+
+// ── CV MODAL ────────────────────────────────────────────────
+(function initCvModal() {
+  const modal     = document.getElementById('cvModal');
+  const closeBtn  = document.getElementById('closeModalBtn');
+  const triggerBtns = document.querySelectorAll('.download-cv-btn');
+
+  if (!modal) return;
+
+  function openModal()  { modal.classList.add('show'); document.body.style.overflow = 'hidden'; }
+  function closeModal() { modal.classList.remove('show'); document.body.style.overflow = ''; }
+
+  triggerBtns.forEach(btn => btn.addEventListener('click', e => { e.preventDefault(); openModal(); }));
+  closeBtn?.addEventListener('click', closeModal);
+  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+  // CV option selection → download
+  modal.querySelectorAll('.cv-option-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const type = btn.dataset.cv;
+      downloadCv(type);
+      closeModal();
     });
-    
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && cvModal && cvModal.classList.contains('show')) {
-            closeCVModal();
-        }
-    });
-    
-    // ========================================
-    // Contact Form Submission
-    // ========================================
-    const contactForm = document.getElementById('contactForm');
-    const formMessage = document.getElementById('formMessage');
-    
-    if (contactForm) {
-        contactForm.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const submitBtn = document.getElementById('submitBtn');
-            const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-            submitBtn.disabled = true;
-            
-            try {
-                const formData = new FormData(contactForm);
-                const response = await fetch(contactForm.action, {
-                    method: 'POST',
-                    body: formData,
-                    headers: { 'Accept': 'application/json' }
-                });
-                
-                if (response.ok) {
-                    formMessage.textContent = '✓ Message sent successfully! I will get back to you soon.';
-                    formMessage.className = 'form-message success';
-                    formMessage.style.display = 'block';
-                    contactForm.reset();
-                    setTimeout(() => formMessage.style.display = 'none', 5000);
-                } else {
-                    throw new Error('Form submission failed');
-                }
-            } catch (error) {
-                formMessage.textContent = '✗ Oops! Something went wrong. Please try again or email me directly.';
-                formMessage.className = 'form-message error';
-                formMessage.style.display = 'block';
-                setTimeout(() => formMessage.style.display = 'none', 5000);
-            } finally {
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-            }
-        });
+  });
+
+  function downloadCv(type) {
+    // All three versions point to the same actual CV file
+    const cvFile = 'Files/MAVUYANGWA_ANGEL_CV.docx';
+    const a = document.createElement('a');
+    a.href = cvFile;
+    a.download = `Angel_Mavuyangwa_CV_${type}.docx`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    showDownloadNotification();
+  }
+
+  function showDownloadNotification() {
+    const existing = document.querySelector('.download-notification');
+    if (existing) existing.remove();
+
+    const note = document.createElement('div');
+    note.className = 'download-notification';
+    note.innerHTML = `
+      <span class="icon" data-icon="checkCircle" style="width:18px;height:18px;display:flex;align-items:center;"></span>
+      CV downloading…
+    `;
+    document.body.appendChild(note);
+
+    // inject SVG into the dynamically created icon
+    if (typeof ICONS !== 'undefined') {
+      note.querySelectorAll('[data-icon]').forEach(el => {
+        const key = el.getAttribute('data-icon');
+        if (ICONS[key]) { el.innerHTML = ICONS[key]; el.setAttribute('aria-hidden', 'true'); }
+      });
     }
-    
-    // ========================================
-    // Navbar Scroll Effect
-    // ========================================
-    const navbar = document.querySelector('.navbar');
-    window.addEventListener('scroll', function() {
-        if (navbar) {
-            navbar.style.boxShadow = window.scrollY > 50 ? 'var(--shadow-md)' : 'none';
-        }
-    });
-    
-    // ========================================
-    // Set Active Navigation Link
-    // ========================================
-    function setActiveNavLink() {
-        const currentPath = window.location.pathname;
-        const filename = currentPath.split('/').pop() || 'index.html';
-        document.querySelectorAll('.nav-link').forEach(link => {
-            const href = link.getAttribute('href');
-            if (href === filename || (filename === '' && href === 'index.html')) {
-                link.classList.add('active');
-            } else {
-                link.classList.remove('active');
-            }
-        });
+
+    setTimeout(() => note.remove(), 3000);
+  }
+})();
+
+// ── CONTACT FORM ────────────────────────────────────────────
+(function initContactForm() {
+  const submitBtn     = document.getElementById('submitBtn');
+  const submitBtnText = document.getElementById('submitBtnText');
+  const formMsg       = document.getElementById('formMessage');
+  if (!submitBtn) return;
+
+  submitBtn.addEventListener('click', () => {
+    const firstName = document.getElementById('firstName')?.value.trim();
+    const lastName  = document.getElementById('lastName')?.value.trim();
+    const email     = document.getElementById('email')?.value.trim();
+    const subject   = document.getElementById('subject')?.value;
+    const message   = document.getElementById('message')?.value.trim();
+
+    if (!firstName || !lastName || !email || !message) {
+      showFormMsg('Please fill in all required fields.', 'error');
+      return;
     }
-    setActiveNavLink();
-    
-    console.log('%c Angel Shiluva Mavuyangwa Portfolio | Software Developer & Business Analyst - script.js:323', 'color: #2c3e66; font-size: 14px; font-weight: bold;');
+    if (!isValidEmail(email)) {
+      showFormMsg('Please enter a valid email address.', 'error');
+      return;
+    }
+
+    // Simulate sending
+    submitBtn.disabled = true;
+    submitBtnText.textContent = 'Sending…';
+    const spinnerIcon = submitBtn.querySelector('.icon');
+    if (spinnerIcon) { spinnerIcon.style.animation = 'spin 1s linear infinite'; }
+
+    setTimeout(() => {
+      submitBtn.disabled = false;
+      submitBtnText.textContent = 'Send Message';
+      if (spinnerIcon) spinnerIcon.style.animation = '';
+
+      // Build mailto link as a practical fallback
+      const body = encodeURIComponent(
+        `Hi Angel,\n\n${message}\n\nBest regards,\n${firstName} ${lastName}`
+      );
+      const sub  = encodeURIComponent(subject || 'Portfolio Enquiry');
+      window.location.href = `mailto:angel.shiluva@email.com?subject=${sub}&body=${body}`;
+
+      showFormMsg('Thanks! Your email client should open shortly.', 'success');
+      clearForm();
+    }, 1200);
+  });
+
+  function showFormMsg(text, type) {
+    if (!formMsg) return;
+    formMsg.textContent = text;
+    formMsg.className   = `form-message ${type}`;
+    formMsg.style.display = 'block';
+    setTimeout(() => { formMsg.style.display = 'none'; }, 5000);
+  }
+
+  function clearForm() {
+    ['firstName','lastName','email','message'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.value = '';
+    });
+    const sel = document.getElementById('subject');
+    if (sel) sel.selectedIndex = 0;
+  }
+
+  function isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+})();
+
+// ── SMOOTH ANCHOR SCROLL ────────────────────────────────────
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
 });
