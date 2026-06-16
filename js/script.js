@@ -157,20 +157,21 @@
   });
 
   function downloadCv(type) {
-    // Map each role to its specific PDF file
+    // Map each role to its specific PDF file - files are in the "Files" subfolder
     const cvFiles = {
-      'business-analyst': 'MAVUYANGWA_ANGEL_CV.pdf',
-      'software-dev': 'MAVUYANGWA_ANGEL_SHILUVA_CV.pdf',
-      'data-science': 'ANGEL SHILUVA MAVUYANGWA.pdf'
+      'business-analyst': 'Files/MAVUYANGWA_ANGEL_CV.pdf',
+      'software-dev': 'Files/MAVUYANGWA_ANGEL_SHILUVA_CV.pdf',
+      'data-science': 'Files/ANGEL SHILUVA MAVUYANGWA.pdf'
     };
     
-    const cvFile = cvFiles[type] || 'ANGEL SHILUVA MAVUYANGWA.pdf';
+    const cvFile = cvFiles[type] || 'Files/ANGEL SHILUVA MAVUYANGWA.pdf';
     const displayName = {
       'business-analyst': 'Business_Analyst_CV',
       'software-dev': 'Software_Developer_CV',
       'data-science': 'Data_Science_CV'
     };
     
+    // Create a temporary anchor element to trigger the download
     const a = document.createElement('a');
     a.href = cvFile;
     a.download = `Angel_Mavuyangwa_${displayName[type] || 'CV'}.pdf`;
