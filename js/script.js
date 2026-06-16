@@ -147,7 +147,7 @@
   modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-  // CV option selection → download
+  // CV option selection → download correct PDF
   modal.querySelectorAll('.cv-option-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const type = btn.dataset.cv;
@@ -157,18 +157,30 @@
   });
 
   function downloadCv(type) {
-    // All three versions point to the same actual CV file
-    const cvFile = 'Files/MAVUYANGWA_ANGEL_CV.docx';
+    // Map each role to its specific PDF file
+    const cvFiles = {
+      'business-analyst': 'MAVUYANGWA_ANGEL_CV.pdf',
+      'software-dev': 'MAVUYANGWA_ANGEL_SHILUVA_CV.pdf',
+      'data-science': 'ANGEL SHILUVA MAVUYANGWA.pdf'
+    };
+    
+    const cvFile = cvFiles[type] || 'ANGEL SHILUVA MAVUYANGWA.pdf';
+    const displayName = {
+      'business-analyst': 'Business_Analyst_CV',
+      'software-dev': 'Software_Developer_CV',
+      'data-science': 'Data_Science_CV'
+    };
+    
     const a = document.createElement('a');
     a.href = cvFile;
-    a.download = `Angel_Mavuyangwa_CV_${type}.docx`;
+    a.download = `Angel_Mavuyangwa_${displayName[type] || 'CV'}.pdf`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
-    showDownloadNotification();
+    showDownloadNotification(displayName[type] || 'CV');
   }
 
-  function showDownloadNotification() {
+  function showDownloadNotification(cvType) {
     const existing = document.querySelector('.download-notification');
     if (existing) existing.remove();
 
@@ -176,7 +188,7 @@
     note.className = 'download-notification';
     note.innerHTML = `
       <span class="icon" data-icon="checkCircle" style="width:18px;height:18px;display:flex;align-items:center;"></span>
-      CV downloading…
+      ${cvType} downloading…
     `;
     document.body.appendChild(note);
 
@@ -231,7 +243,7 @@
         `Hi Angel,\n\n${message}\n\nBest regards,\n${firstName} ${lastName}`
       );
       const sub  = encodeURIComponent(subject || 'Portfolio Enquiry');
-      window.location.href = `mailto:angel.shiluva@email.com?subject=${sub}&body=${body}`;
+      window.location.href = `mailto:angelshiluva2004@gmail.com?subject=${sub}&body=${body}`;
 
       showFormMsg('Thanks! Your email client should open shortly.', 'success');
       clearForm();
