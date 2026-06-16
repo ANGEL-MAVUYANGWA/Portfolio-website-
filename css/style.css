@@ -322,21 +322,24 @@ h1, h2, h3, h4 {
   position: relative;
   width: 360px; height: 360px;
   flex-shrink: 0;
+  border-radius: 50% !important;
 }
 
 .profile-ring {
   width: 100%; height: 100%;
-  border-radius: 50%; position: relative;
+  border-radius: 50% !important;
+  position: relative;
   background: linear-gradient(135deg, var(--teal) 0%, var(--accent) 100%);
   padding: 3px; box-sizing: border-box;
 }
 .profile-ring-inner {
   width: 100%; height: 100%;
-  border-radius: 50%; overflow: hidden;
+  border-radius: 50% !important;
+  overflow: hidden;
   background: var(--navy-card);
 }
 .profile-ring-inner img {
-  width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
+  width: 100%; height: 100%; object-fit: cover; border-radius: 50% !important;
 }
 
 /* floating tech badges */
@@ -929,6 +932,25 @@ footer {
   .social-icons { justify-content: center; }
 
   .section-header h2 { font-size: 1.7rem; }
+  
+  /* Profile image sizing on tablet */
+  .profile-img-container { width: 250px; height: 250px; }
+  
+  /* Floating badges on tablet */
+  .floating-badge {
+    width: 40px;
+    height: 40px;
+  }
+  .floating-badge .icon {
+    width: 20px;
+    height: 20px;
+  }
+  .floating-badge.b-java    { top: -5px;  right: 0px;  }
+  .floating-badge.b-python  { bottom: 20px; left: -10px; }
+  .floating-badge.b-react   { top: 25%;   right: -12px; }
+  .floating-badge.b-db      { bottom: 35%; left: -12px; }
+  .floating-badge.b-chart   { top: 65%;   right: -5px;  }
+  .floating-badge.b-js      { top: 8%;    left: -5px;   }
 }
 
 @media (max-width: 480px) {
@@ -936,7 +958,29 @@ footer {
   .btn { width: 100%; justify-content: center; }
   .hero-stats { justify-content: center; }
   .featured-grid { grid-template-columns: 1fr; }
-  .floating-badge { display: none; }
+  
+  /* Show floating badges on mobile with smaller size */
+  .floating-badge {
+    display: flex !important;
+    width: 36px;
+    height: 36px;
+  }
+  .floating-badge .icon {
+    width: 18px;
+    height: 18px;
+  }
+  .floating-badge.b-java    { top: -8px;  right: -2px;  }
+  .floating-badge.b-python  { bottom: 15px; left: -8px; }
+  .floating-badge.b-react   { top: 20%;   right: -8px;  }
+  .floating-badge.b-db      { bottom: 30%; left: -8px;  }
+  .floating-badge.b-chart   { top: 60%;   right: -2px;  }
+  .floating-badge.b-js      { top: 5%;    left: -5px;   }
+  
+  /* Profile image on mobile */
+  .profile-img-container { 
+    width: 200px; 
+    height: 200px; 
+  }
 }
 
 /* ── SCROLL ANIMATIONS ────────────────────────────────────── */
